@@ -1,0 +1,58 @@
+# Jenkins.
+
+FROM ubuntu:14.04
+MAINTAINER Thomas Quintana <thomas@bettervoice.com>
+
+# Enable the Ubuntu multiverse repository.
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty multiverse" >> /etc/apt/source.list
+RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty multiverse">> /etc/apt/source.list
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
+RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
+
+# Install Dependencies.
+RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev wget
+
+# Use Gawk.
+RUN update-alternatives --set awk /usr/bin/gawk
+
+# Download FreeSWITCH.
+RUN git clone https://stash.freeswitch.org/scm/fs/freeswitch.git /usr/src/freeswitch
+
+# Bootstrap the build.
+WORKDIR /usr/src/freeswitch
+RUN git checkout -b v1.4.15
+RUN ./bootstrap.sh
+
+# Enable the desired modules.
+ADD build/modules.conf /usr/src/freeswitch/modules.conf
+
+# Build FreeSWITCH.
+RUN ./configure --prefix=/usr/share/freeswitch
+RUN make
+RUN make install
+RUN make uhd-sounds-install
+RUN make uhd-moh-install
+RUN make samples
+
+# Post install configuration.
+ADD sysv/init /etc/init.d/freeswitch
+RUN chmod +x /etc/init.d/freeswitch
+RUN update-rc.d -f freeswitch defaults
+ADD sysv/default /etc/default/freeswitch
+
+# Add the freeswitch user.
+RUN adduser --gecos "FreeSWITCH Voice Platform" --no-create-home --disabled-login --disabled-password --system --ingroup daemon --home /usr/share/freeswitch freeswitch
+RUN chown -R freeswitch:daemon /usr/share/freeswitch
+
+# Enable the compiled modules at runtime.
+ADD config/modules.conf.xml /usr/share/freeswitch/conf/autoload_configs/modules.conf.xml
+
+# Expose the container to the world.
+EXPOSE 5060/tcp 5060/udp 5080/tcp 5080/udp 8021/tcp
+
+# Create the log file.
+RUN touch /usr/share/freeswitch/log/freeswitch.log
+RUN chown freeswitch:daemon /usr/share/freeswitch/log/freeswitch.log
+
+# Start the container.
+CMD service snmpd start && service freeswitch start && tail -f /usr/share/freeswitch/log/freeswitch.log
