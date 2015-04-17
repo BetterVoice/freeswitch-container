@@ -10,7 +10,7 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >>
 RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
 
 # Install Dependencies.
-RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev wget
+RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev wget
 
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
@@ -20,7 +20,7 @@ RUN git clone https://stash.freeswitch.org/scm/fs/freeswitch.git /usr/src/freesw
 
 # Bootstrap the build.
 WORKDIR /usr/src/freeswitch
-RUN git checkout -b v1.4.15
+RUN git checkout -b v1.4.18
 RUN ./bootstrap.sh
 
 # Enable the desired modules.
