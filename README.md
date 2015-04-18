@@ -125,19 +125,6 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_rayo` - 3PCC over XMPP - http://rayo.org/xep
 - `mod_snmp` - SNMP AgentX module
 
-- mod_cdr_csv
-- mod_cdr_mongodb
-- mod_cdr_pg_csv
-- mod_cdr_sqlite
-- mod_erlang_event
-- mod_event_multicast
-- mod_event_socket
-- mod_event_zmq
-- mod_json_cdr
-- mod_radius_cdr
-- mod_rayo
-- mod_snmp
-
 ### File Formats
 
 - mod_local_stream
