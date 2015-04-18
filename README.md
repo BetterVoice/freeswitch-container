@@ -5,7 +5,7 @@ This project can be used to deploy a FreeSWITCH server inside a Docker container
 
 ## Running the Container
 
-``` ```
+``` sudo docker ```
 
 ## Available Modules
 
