@@ -5,16 +5,18 @@ This project can be used to deploy a FreeSWITCH server inside a Docker container
 
 ## Running the Container
 
+``` ```
+
 ## Available Modules
 
 The following modules are available in the container and can be loaded at runtime by providing a `modules.conf.xml` file with the desired module names uncommented.
 
 ### Applications
 
-- `mod_avmd`: Detects voicemail beeps using a generalized approach.
-- `mod_blacklist`: Blacklist module.
-- `mod_callcenter`: Call queuing application that can be used for call center needs.
-- `mod_cidlookup`: Provides a means (database, url) to lookup the callerid name from a number.
+- ```mod_avmd```: Detects voicemail beeps using a generalized approach.
+- ```mod_blacklist```: Blacklist module.
+- ```mod_callcenter```: Call queuing application that can be used for call center needs.
+- ```mod_cidlookup```: Provides a means (database, url) to lookup the callerid name from a number.
 - `mod_commands`: A mass plethora of API interface commands.
 - `mod_conference`: Conference room module.
 - `mod_curl`: Allows scripts to make HTTP requests as receive responses as plain text or JSON.
@@ -45,7 +47,6 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_rss`: Reads RSS feeds via a TTS engine.
 - `mod_sms`: Apps for chat messages
 - `mod_snapshot`: Records a sliding window of audio and can take snapshots to disk.
-- `mod_snmp`: SNMP module.
 - `mod_snom`: Controlling softkeys on Snom phones (button function, led state, label etc.)
 - `mod_soundtouch`: Modify the pitch of the audio and other sound effects.
 - `mod_spandsp`: Spandsp tone and DTMF detectors. A combination of mod_fax and mod_voipcodecs and mod_t38gateway.
