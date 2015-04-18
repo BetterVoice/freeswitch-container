@@ -68,48 +68,62 @@ The following modules are available in the container and can be loaded at runtim
 
 ### Codecs
 
-- mod_amr
-- mod_amrwb
-- mod_bv
-- mod_b64
-- mod_celt
-- mod_codec2
-- mod_dahdi_codec
-- mod_g723_1
-- mod_g729
-- mod_h26x
-- mod_vp8
-- mod_ilbc
-- mod_isac
-- mod_mp4v
-- mod_opus
-- mod_silk
-- mod_siren
-- mod_speex
-- mod_theora
+- `mod_amr`: GSM-AMR (Adaptive Multi-Rate) codec.
+- `mod_amrwb`: GSM-AMRWB (ARM Wide Band) codec.
+- `mod_bv`: BroadVoice16 and BroadVoice32 audio codecs (Broadcom codecs).
+- `mod_celt`: CELT ultra-low delay audio codec.
+- `mod_codec2`: FreeSWITCH CODEC2 Module.
+- 'mod_dahdi_codec' - DAHDI Codecs (G729A 8.0kbit, G723.1 5.3kbit).
+- `mod_g723_1`: G.723.1 codec.
+- `mod_g729`: G.729 codec.
+- `mod_h26x`: H26X signed linear codec.
+- `mod_ilbc`: ILBC codec.
+- `mod_isac`: Internet Speech Audio Codec open sourced by Google, used in WebRTC
+- `mod_mp4v`: MPEG4 video codec
+- `mod_opus`: The OPUS ultra-low delay audio codec (http://opus-codec.org/)
+- `mod_silk`: Skype's SILK codec.
+- `mod_siren`: G.722.1 (Siren7) and G.722.1 Annex C (Siren14) Polycom codecs.
+- `mod_speex`: Speex codec.
+- `mod_theora`: Theora video codec
+- `mod_voipcodecs`: VoIP Codecs (G.711, G.722, G.726, GSM-FR, IMA_ADPCM, LPC10)
+- `mod_vp8`: VP8 video codec
 
 ### Dialplan
 
-- mod_dialplan_asterisk
-- mod_dialplan_directory
-- mod_dialplan_xml
+- `mod_dialplan_asterisk` - Allows you to create dialplans the old-fashioned way.
+- `mod_dialplan_directory` - Allows you to obtain a dialplan from a directory resource (see directories below)
+- `mod_dialplan_xml` - Allows you to program dialplans in XML format.
+- `mod_yaml` - Allows you to program dialplans in YAML format.
 
 ### Directories
 
-- mod_ldap
+- `mod_ldap` - LDAP module made to obtain dialplans, user accounts, etc.
 
 ### Endpoints
 
-- mod_alsa
-- mod_dingaling
-- mod_loopback
-- mod_portaudio
-- mod_rtmp
-- mod_skinny
-- mod_skypopen
-- mod_sofia
+- `mod_alsa` - Sound card endpoint.
+- `mod_dingaling` - Jabber/Google Talk integration module; note XMPP access to Google Voice ended 2014.05.15
+- `mod_loopback` - Loopback endpoint module - A loopback channel driver to make an outbound call as an inbound call.
+- `mod_portaudio` - Voice through a local soundcard.
+- `mod_rtmp` - "Real time media protocol" endpoint for FreeSWITCH.
+- `mod_skinny` - SCCP module
+- `mod_skypopen` - Skype compatible module.
+- `mod_sofia` - SIP module.
 
 ### Event Handlers
+
+- `mod_cdr_csv` - CSV call detail record handler.
+- `mod_cdr_mongodb` - MongoDB CDR module
+- `mod_cdr_pg_csv` - Asterisk Compatible CDR Module with PostgreSQL interface
+- `mod_cdr_sqlite` - SQLite CDR Module
+- `mod_erlang_event` - Module to send/receive events/commands in Erlang's binary format.
+- `mod_event_multicast` - Broadcasts events to netmask.
+- `mod_event socket` - Sends events via a single socket.
+- `mod_event_zmq` - http://www.zeromq.org/
+- `mod_json_cdr` - JSON CDR Module to files or curl
+- `mod_radius_cdr` - RADIUS CDR Module.
+- `mod_rayo` - 3PCC over XMPP - http://rayo.org/xep
+- `mod_snmp` - SNMP AgentX module
 
 - mod_cdr_csv
 - mod_cdr_mongodb
