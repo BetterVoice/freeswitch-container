@@ -90,91 +90,90 @@ The following modules are available in the container and can be loaded at runtim
 
 ### Dialplan
 
-- `mod_dialplan_asterisk` - Allows you to create dialplans the old-fashioned way.
-- `mod_dialplan_directory` - Allows you to obtain a dialplan from a directory resource (see directories below)
-- `mod_dialplan_xml` - Allows you to program dialplans in XML format.
-- `mod_yaml` - Allows you to program dialplans in YAML format.
+- `mod_dialplan_asterisk`: Allows you to create dialplans the old-fashioned way.
+- `mod_dialplan_directory`: Allows you to obtain a dialplan from a directory resource
+- `mod_dialplan_xml`: Allows you to program dialplans in XML format.
+- `mod_yaml`: Allows you to program dialplans in YAML format.
 
 ### Directories
 
-- `mod_ldap` - LDAP module made to obtain dialplans, user accounts, etc.
+- `mod_ldap`: LDAP module made to obtain dialplans, user accounts, etc.
 
 ### Endpoints
 
-- `mod_alsa` - Sound card endpoint.
-- `mod_dingaling` - Jabber/Google Talk integration module; note XMPP access to Google Voice ended 2014.05.15
-- `mod_loopback` - Loopback endpoint module - A loopback channel driver to make an outbound call as an inbound call.
-- `mod_portaudio` - Voice through a local soundcard.
-- `mod_rtmp` - "Real time media protocol" endpoint for FreeSWITCH.
-- `mod_skinny` - SCCP module
-- `mod_skypopen` - Skype compatible module.
-- `mod_sofia` - SIP module.
+- `mod_alsa`: Sound card endpoint.
+- `mod_dingaling`: Jabber/Google Talk integration module; note XMPP access to Google Voice ended 2014.05.15
+- `mod_loopback`: Loopback endpoint module - A loopback channel driver to make an outbound call as an inbound call.
+- `mod_portaudio`: Voice through a local soundcard.
+- `mod_rtmp`: "Real time media protocol" endpoint for FreeSWITCH.
+- `mod_skinny`: SCCP module
+- `mod_skypopen`: Skype compatible module.
+- `mod_sofia`: SIP module.
 
 ### Event Handlers
 
-- `mod_cdr_csv` - CSV call detail record handler.
-- `mod_cdr_mongodb` - MongoDB CDR module
-- `mod_cdr_pg_csv` - Asterisk Compatible CDR Module with PostgreSQL interface
-- `mod_cdr_sqlite` - SQLite CDR Module
-- `mod_erlang_event` - Module to send/receive events/commands in Erlang's binary format.
-- `mod_event_multicast` - Broadcasts events to netmask.
-- `mod_event socket` - Sends events via a single socket.
-- `mod_event_zmq` - http://www.zeromq.org/
-- `mod_json_cdr` - JSON CDR Module to files or curl
-- `mod_radius_cdr` - RADIUS CDR Module.
-- `mod_rayo` - 3PCC over XMPP - http://rayo.org/xep
-- `mod_snmp` - SNMP AgentX module
+- `mod_cdr_csv`: CSV call detail record handler.
+- `mod_cdr_mongodb`: MongoDB CDR module
+- `mod_cdr_pg_csv`: Asterisk Compatible CDR Module with PostgreSQL interface
+- `mod_cdr_sqlite`: SQLite CDR Module
+- `mod_erlang_event`: Module to send/receive events/commands in Erlang's binary format.
+- `mod_event_multicast`: Broadcasts events to netmask.
+- `mod_event socket`: Sends events via a single socket.
+- `mod_event_zmq`: http://www.zeromq.org/
+- `mod_json_cdr`: JSON CDR Module to files or curl
+- `mod_radius_cdr`: RADIUS CDR Module.
+- `mod_rayo`: 3PCC over XMPP - http://rayo.org/xep
+- `mod_snmp`: SNMP AgentX module
+- `mod_xml_cdr` - XML-based call detail record handler.
 
 ### File Formats
 
-- mod_local_stream
-- mod_native_file
-- mod_portaudio_stream
-- mod_shell_stream
-- mod_shout
-- mod_sndfile
-- mod_ssml
-- mod_tone_stream
-- mod_vlc
+- `mod_local_stream`: Multiple channels connected to same looped file stream.
+- `mod_native_file`: File interface for codec specific file formats.
+- `mod_portaudio_stream`: Stream from an external audio source for Music on Hold
+- `mod_shell_stream`: Stream audio from an arbitrary shell command. Read audio from a database, from a soundcard, etc.
+- `mod_shout`: MP3 files and shoutcast streams.
+- `mod_sndfile`: Multi-format file format transcoder (WAV, etc)
+- `mod_ssml`: Speech Synthesis Markup Language parser
+- `mod_tone_stream`: Tone Generation Stream.
+- `mod_vlc`: Stream audio from VLC media player using libvlc.
 
 ### Languages
 
-- mod_lua
-- mod_perl
-- mod_python
-- mod_yaml
-- mod_v8
+- `mod_lua` - Lua support.
+- `mod_perl` - Perl support.
+- `mod_python` - Python Support.
+- `mod_v8` - Google V8 JavaScript (ECMAScript) engine.
 
 ### Loggers
 
-- mod_console
-- mod_logfile
-- mod_syslog
+- `mod_console` - Console logger.
+- `mod_logfile` - File logger.
+- `mod_syslog` - Syslog logger.
 
 ### Language-Specific
 
-- mod_say_de
-- mod_say_en
-- mod_say_es
-- mod_say_fa
-- mod_say_fr
-- mod_say_he
-- mod_say_hr
-- mod_say_hu
-- mod_say_it
-- mod_say_ja
-- mod_say_nl
-- mod_say_pl
-- mod_say_pt
-- mod_say_ru
-- mod_say_th
-- mod_say_zh
+- `mod_say_de` - German language text-to-speech engine
+- `mod_say_en` - English language text-to-speech engine
+- `mod_say_es` - Spanish language text-to-speech engine
+- `mod_say_fa` - Persian language text-to-speech engine
+- `mod_say_fr` - French language text-to-speech engine
+- `mod_say_he` - Hebrew language text-to-speech engine
+- `mod_say_hr` - Croatian language text-to-speech engine
+- `mod_say_hu` - Hungarian language text-to-speech engine
+- `mod_say_it` - Italian language text-to-speech engine
+- `mod_say_ja` - Japanese language text-to-speech engine
+- `mod_say_nl` - Dutch language text-to-speech engine
+- `mod_say_pl` - Polish language text-to-speech engine
+- `mod_say_pt` - Portuguese language text-to-speech engine
+- `mod_say_ru` - Russian language text-to-speech engine
+- `mod_say_th` - Thai language text-to-speech engine
+- `mod_say_zh` - Chinese, Mandarin, Cantonese language text-to-speech engine
 
 ### External API's
 
-- mod_xml_cdr
-- mod_xml_curl
-- mod_xml_ldap
-- mod_xml_radius
-- mod_xml_rpc
-- mod_xml_scgi
+- `mod_xml_curl` - XML Gateway Code. Configure FreeSWITCH™ from a web server on boot and on the fly.
+- `mod_xml_ldap` - LDAP XML Gateway.
+- `mod_xml_radius` - RADIUS authentication gateway.
+- `mod_xml_rpc` - XML Remote Procedure Calls. Issue commands from your web application.
+- `mod_xml_scgi` - Simple Common Gateway Interface.
