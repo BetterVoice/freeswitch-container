@@ -3,13 +3,13 @@ FreeSWITCH Dockerfile
 
 This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.18. An effort was made to build many modules so the container can be generic enough to serve many purposes.
 
-### Running the Container
+## Running the Container
 
-### Available Modules
+## Available Modules
 
 The following modules are available in the container and can be loaded at runtime by providing a `modules.conf.xml` file with the desired module names uncommented.
 
-# Applications
+### Applications
 
 - mod_avmd
 - mod_blacklist
@@ -57,14 +57,14 @@ The following modules are available in the container and can be loaded at runtim
 - mod_voicemail_ivr
 - mod_random
 
-# Speech Recognition / Text-to-Speech
+### Speech Recognition / Text-to-Speech
 
 - mod_flite
 - mod_pocketsphinx
 - mod_tts_commandline
 - mod_unimrcp
 
-# Codecs
+### Codecs
 
 - mod_amr
 - mod_amrwb
@@ -86,17 +86,17 @@ The following modules are available in the container and can be loaded at runtim
 - mod_speex
 - mod_theora
 
-# Dialplan
+### Dialplan
 
 - mod_dialplan_asterisk
 - mod_dialplan_directory
 - mod_dialplan_xml
 
-# Directories
+### Directories
 
 - mod_ldap
 
-# Endpoints
+### Endpoints
 
 - mod_alsa
 - mod_dingaling
@@ -107,7 +107,7 @@ The following modules are available in the container and can be loaded at runtim
 - mod_skypopen
 - mod_sofia
 
-# Event Handlers
+### Event Handlers
 
 - mod_cdr_csv
 - mod_cdr_mongodb
@@ -122,7 +122,7 @@ The following modules are available in the container and can be loaded at runtim
 - mod_rayo
 - mod_snmp
 
-# File Formats
+### File Formats
 
 - mod_local_stream
 - mod_native_file
@@ -134,7 +134,7 @@ The following modules are available in the container and can be loaded at runtim
 - mod_tone_stream
 - mod_vlc
 
-# Languages
+### Languages
 
 - mod_lua
 - mod_perl
@@ -142,13 +142,13 @@ The following modules are available in the container and can be loaded at runtim
 - mod_yaml
 - mod_v8
 
-# Loggers
+### Loggers
 
 - mod_console
 - mod_logfile
 - mod_syslog
 
-# Language-Specific
+### Language-Specific
 
 - mod_say_de
 - mod_say_en
@@ -167,7 +167,7 @@ The following modules are available in the container and can be loaded at runtim
 - mod_say_th
 - mod_say_zh
 
-# External API's
+### External API's
 
 - mod_xml_cdr
 - mod_xml_curl
