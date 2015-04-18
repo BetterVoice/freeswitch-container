@@ -11,51 +11,53 @@ The following modules are available in the container and can be loaded at runtim
 
 ### Applications
 
-- mod_avmd
-- mod_blacklist
-- mod_callcenter
-- mod_cidlookup
-- mod_commands
-- mod_conference
-- mod_curl
-- mod_db
-- mod_directory
-- mod_distributor
-- mod_dptools
-- mod_easyroute
-- mod_enum
-- mod_esf
-- mod_esl
-- mod_expr
-- mod_fifo
-- mod_fsk
-- mod_fsv
-- mod_hash
-- mod_httapi
-- mod_http_cache
-- mod_ladspa
-- mod_lcr
-- mod_memcache
-- mod_mongo
-- mod_mp4
-- mod_nibblebill
-- mod_oreka
-- mod_rad_auth
-- mod_redis
-- mod_rss
-- mod_sms
-- mod_snapshot
-- mod_snom
-- mod_soundtouch
-- mod_spandsp
-- mod_spy
-- mod_stress
-- mod_translate
-- mod_valet_parking
-- mod_vmd
-- mod_voicemail
-- mod_voicemail_ivr
-- mod_random
+- mod_avmd: Detects voicemail beeps using a generalized approach.
+- mod_blacklist: Blacklist module.
+- mod_callcenter: Call queuing application that can be used for call center needs.
+- mod_cidlookup: Provides a means (database, url) to lookup the callerid name from a number.
+- mod_commands: A mass plethora of API interface commands.
+- mod_conference: Conference room module.
+- mod_curl: Allows scripts to make HTTP requests as receive responses as plain text or JSON.
+- mod_db: Database key/value store functionality, group dialing, and limit backend.
+- mod_directory: Dial by Name directory.
+- mod_distributor: Simple round-robin style distributions.
+- mod_dptools: Dialplan Tools: provides a number of apps and utilities for the dialplan.
+- mod_easyroute: A simple DID routing engine that uses a database lookup to determine how to route an incoming call.
+- mod_enum: Route PSTN numbers over internet according to ENUM servers, such as e164.org
+- mod_esf: Holds the multi cast paging application for SIP.
+- mod_esl: Allows to generate remote ESL commands.
+- mod_expr: Brian Allen Vanderburg's expression evaluation library.
+- mod_fifo: FIFO module.
+- mod_fsk: FSK (Frequency-Shift Keying) data transfer
+- mod_fsv: FreeSWITCH Video application (Recording and playback)
+- mod_hash: Hashtable key/value store functionality and limit backend
+- mod_httapi: HT-TAPI Hypertext Telephony API (Twilio FreeSWITCH style)
+- mod_http_cache: HTTP GET with caching.
+- mod_ladspa: use Auto-tune on your call.
+- mod_lcr: Implements LCR (Least Cost Routing)
+- mod_memcache: API that integrates with memcached (a distributed key/value object store)
+- mod_mongo: http://www.mongodb.org/
+- mod_mp4: MP4 File Format support for video apps.
+- mod_nibblebill: Billing module ("nibbles" at credit/cash amounts during calls)
+- mod_oreka: Module for Media Recording with Oreka
+- mod_rad_auth: use RADIUS for authentication
+- mod_redis: supplies a limit back-end that uses Redis.
+- mod_rss: Reads RSS feeds via a TTS engine.
+- mod_sms: Apps for chat messages
+- mod_snapshot: Records a sliding window of audio and can take snapshots to disk.
+- mod_snmp: SNMP module.
+- mod_snom: Controlling softkeys on Snom phones (button function, led state, label etc.)
+- mod_soundtouch: Modify the pitch of the audio and other sound effects.
+- mod_spandsp: Spandsp tone and DTMF detectors. A combination of mod_fax and mod_voipcodecs and mod_t38gateway.
+- mod_spy: User spy module.
+- mod_stress: Module for detecting voice stress.
+- mod_tone_detect: Tone detection module.
+- mod_translate: Format numbers into a specified format.
+- mod_valet_parking: Allows calls to be parked and picked up easily.
+- mod_vmd: Voicemail beep detection module.
+- mod_voicemail: Full-featured voicemail module.
+- mod_voicemail_ivr: VoiceMail IVR Interface.
+- mod_xml_odbc: Allows user directory to be accessed from a database in realtime.
 
 ### Speech Recognition / Text-to-Speech
 

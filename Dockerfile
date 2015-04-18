@@ -44,9 +44,6 @@ ADD sysv/default /etc/default/freeswitch
 RUN adduser --gecos "FreeSWITCH Voice Platform" --no-create-home --disabled-login --disabled-password --system --ingroup daemon --home /usr/share/freeswitch freeswitch
 RUN chown -R freeswitch:daemon /usr/share/freeswitch
 
-# Enable the compiled modules at runtime.
-ADD config/modules.conf.xml /usr/share/freeswitch/conf/autoload_configs/modules.conf.xml
-
 # Create the log file.
 RUN touch /usr/share/freeswitch/log/freeswitch.log
 RUN chown freeswitch:daemon /usr/share/freeswitch/log/freeswitch.log
