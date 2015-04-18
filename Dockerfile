@@ -47,9 +47,6 @@ RUN chown -R freeswitch:daemon /usr/share/freeswitch
 # Enable the compiled modules at runtime.
 ADD config/modules.conf.xml /usr/share/freeswitch/conf/autoload_configs/modules.conf.xml
 
-# Expose the container to the world.
-EXPOSE 5060/tcp 5060/udp 5080/tcp 5080/udp 8021/tcp
-
 # Create the log file.
 RUN touch /usr/share/freeswitch/log/freeswitch.log
 RUN chown freeswitch:daemon /usr/share/freeswitch/log/freeswitch.log
