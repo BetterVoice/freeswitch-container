@@ -48,5 +48,12 @@ RUN chown -R freeswitch:daemon /usr/share/freeswitch
 RUN touch /usr/share/freeswitch/log/freeswitch.log
 RUN chown freeswitch:daemon /usr/share/freeswitch/log/freeswitch.log
 
+# Open the container up to the world.
+EXPOSE 5060/tcp
+EXPOSE 5060/udp
+EXPOSE 5080/tcp
+EXPOSE 5080/udp
+EXPOSE 8021/tcp
+
 # Start the container.
 CMD service snmpd start && service freeswitch start && tail -f /usr/share/freeswitch/log/freeswitch.log
