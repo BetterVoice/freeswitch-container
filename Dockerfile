@@ -56,4 +56,4 @@ EXPOSE 5080/udp
 EXPOSE 8021/tcp
 
 # Start the container.
-CMD chown -R freeswitch:daemon /usr/share/freeswitch/conf && service snmpd start && service freeswitch start && tail -f /usr/share/freeswitch/log/freeswitch.log
+CMD service snmpd start && service freeswitch start && tail -f /usr/share/freeswitch/log/freeswitch.log
