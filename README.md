@@ -7,6 +7,8 @@ This project can be used to deploy a FreeSWITCH server inside a Docker container
 
 ```sudo docker run --name freeswitch -p 5060:5060/tcp -p 5060:5060/udp -p 5080:5080/tcp -p 5080:5080/udp -p 8021:8021/tcp -v /home/ubuntu/freeswitch/conf:/usr/share/freeswitch/conf bettervoice/freeswitch:1.4.18```
 
+*Keep in mind that freeswitch has to be able to read the mounted volume.*
+
 ## Available Modules
 
 The following modules are available in the container and can be loaded at runtime by providing a `modules.conf.xml` file with the desired module names uncommented.
