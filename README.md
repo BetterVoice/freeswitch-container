@@ -3,11 +3,11 @@ FreeSWITCH Dockerfile
 
 This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.18. An effort was made to build many modules so the container can be generic enough to serve many purposes.
 
-*The container exposes the following ports:
+The container exposes the following ports:
 - 5060/tcp 5060/udp 5080/tcp 5080/udp as SIP Signaling ports.
 - 5066/tcp 7443/tcp as WebSocket Signaling ports.
 - 8021/tcp as Event Socket port.
-- 60535-65535/udp as media ports.*
+- 60535-65535/udp as media ports.
 
 ## Running the Container
 
