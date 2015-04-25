@@ -7,7 +7,7 @@ The container exposes the following ports:
 - 5060/tcp 5060/udp 5080/tcp 5080/udp as SIP Signaling ports.
 - 5066/tcp 7443/tcp as WebSocket Signaling ports.
 - 8021/tcp as Event Socket port.
-- 60535-65535/udp as media ports.
+- 64535-65535/udp as media ports.
 
 ## Running the Container
 
