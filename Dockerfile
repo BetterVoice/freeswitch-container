@@ -26,6 +26,10 @@ RUN GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gy
 RUN ninja -j7 -C out/Debug 
 RUN ninja -j7 -C out/Release
 RUN out/Release/libyuv_unittest --gtest_filter=*
+RUN cp libyuv.a /usr/local/lib
+RUN mkdir -p /usr/local/include/libyuv/libyuv
+RUN cp -rf include/libyuv.h /usr/local/include/libyuv
+RUN cp -rf include/libyuv/*.h /usr/local/include/libyuv/libyuv
 
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
