@@ -17,7 +17,9 @@ RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /
 ENV PATH=/usr/src/depot_tools:"$PATH"
 
 # Install libyuv
-RUN git clone https://chromium.googlesource.com/libyuv/libyuv /usr/src/libyuv
+RUN gclient config https://chromium.googlesource.com/libyuv/libyuv 
+RUN gclient sync
+RUN mv libyuv /usr/src
 WORKDIR /usr/src/libyuv
 RUN tools/clang/scripts/update.sh
 RUN GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
