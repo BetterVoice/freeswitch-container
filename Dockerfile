@@ -10,7 +10,20 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >>
 RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
 
 # Install Dependencies.
-RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libperl-dev libpython-dev libyuv-dev odbc-postgresql wget unixodbc
+RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libperl-dev libpython-dev odbc-postgresql wget unixodbc
+
+# Install depot tools.
+RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/src/depot_tools
+ENV PATH=/usr/src/depot_tools:"$PATH"
+
+# Install libyuv
+RUN git clone https://chromium.googlesource.com/libyuv/libyuv /usr/src/libyuv
+WORKDIR /usr/src/libyuv
+RUN tools/clang/scripts/update.sh
+RUN GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+RUN ninja -j7 -C out/Debug 
+RUN ninja -j7 -C out/Release
+RUN out/Release/libyuv_unittest --gtest_filter=*
 
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
