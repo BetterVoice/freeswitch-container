@@ -1,7 +1,7 @@
 FreeSWITCH Dockerfile
 =====================
 
-This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.18. An effort was made to build many modules so the container can be generic enough to serve many purposes.
+This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.19. An effort was made to build many modules so the container can be generic enough to serve many purposes.
 
 The container exposes the following ports:
 - 5060/tcp 5060/udp 5080/tcp 5080/udp as SIP Signaling ports.
@@ -11,7 +11,7 @@ The container exposes the following ports:
 
 ## Running the Container
 
-```sudo docker run --name freeswitch -p 5060:5060/tcp -p 5060:5060/udp -p 5080:5080/tcp -p 5080:5080/udp -p 8021:8021/tcp -p 7443:7443/tcp -p 60535-65535:60535-65535/udp -v /home/ubuntu/freeswitch/conf:/usr/share/freeswitch/conf bettervoice/freeswitch:1.4.18```
+```sudo docker run --name freeswitch -p 5060:5060/tcp -p 5060:5060/udp -p 5080:5080/tcp -p 5080:5080/udp -p 8021:8021/tcp -p 7443:7443/tcp -p 60535-65535:60535-65535/udp -v /home/ubuntu/freeswitch/conf:/usr/share/freeswitch/conf bettervoice/freeswitch:1.4.19```
 
 *Keep in mind that freeswitch has to be able to read the mounted volume.*
 
