@@ -82,6 +82,15 @@ RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
+# Install libsilk-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/libsilk-1.0.8.tar.gz
+RUN tar -xzvf libsilk-1.0.8.tar.gz
+WORKDIR libsilk-1.0.8
+RUN ./bootstrap.sh
+RUN ./configure
+RUN make && make install
+
 # Download FreeSWITCH.
 WORKDIR /usr/src
 ENV GIT_SSL_NO_VERIFY=1
