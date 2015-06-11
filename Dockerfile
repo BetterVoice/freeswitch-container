@@ -12,33 +12,23 @@ RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse
 # Install Dependencies.
 RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libperl-dev libpython-dev odbc-postgresql wget unixodbc
 
-# Install depot tools.
-RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/src/depot_tools
-ENV PATH=/usr/src/depot_tools:"$PATH"
-
-# Install libyuv
-RUN gclient config https://chromium.googlesource.com/libyuv/libyuv 
-RUN gclient sync
-RUN mv libyuv /usr/src
-WORKDIR /usr/src/libyuv
-RUN tools/clang/scripts/update.sh
-RUN GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-RUN ninja -j7 -C out/Debug 
-RUN ninja -j7 -C out/Release
-RUN out/Release/libyuv_unittest --gtest_filter=*
-RUN cp out/Release/libyuv.a /usr/local/lib
-RUN mkdir -p /usr/local/include/libyuv/libyuv
-RUN cp -rf out/Release/include/libyuv.h /usr/local/include/libyuv
-RUN cp -rf out/Release/include/libyuv/*.h /usr/local/include/libyuv/libyuv
-
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
 
+# Install libyuv
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/libyuv-0.0.1280.tar.gz
+RUN tar -xzvf libyuv-0.0.1280.tar.gz
+WORKDIR libyuv-0.0.1280
+RUN make install
+
 # Download FreeSWITCH.
-RUN git clone https://stash.freeswitch.org/scm/fs/freeswitch.git /usr/src/freeswitch
+WORKDIR /usr/src
+ENV GIT_SSL_NO_VERIFY=1
+RUN git clone https://freeswitch.org/stash/scm/fs/freeswitch.git
 
 # Bootstrap the build.
-WORKDIR /usr/src/freeswitch
+WORKDIR freeswitch
 RUN git checkout -b v1.4.19
 RUN ./bootstrap.sh
 
