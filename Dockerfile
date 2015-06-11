@@ -39,6 +39,48 @@ RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
+# Install libcodec2-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/libcodec2-2.59.tar.gz
+RUN tar -xzvf libcodec2-2.59.tar.gz
+WORKDIR libcodec2-2.59
+RUN ./bootstrap.sh
+RUN ./configure
+RUN make && make install
+
+# Install libflite-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/flite-2.0.0.tar.gz
+RUN tar -xzvf flite-2.0.0.tar.gz
+WORKDIR flite-2.0.0
+RUN ./configure --enable-shared
+RUN make && make install
+
+# Install libilbc-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/ilbc-0.0.1.tar.gz
+RUN tar -xzvf ilbc-0.0.1.tar.gz
+WORKDIR ilbc-0.0.1
+RUN ./bootstrap.sh
+RUN ./configure
+RUN make && make install
+
+# Install libmongoc-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/mongo-c-driver-1.1.0.tar.gz
+RUN tar -xzvf mongo-c-driver-1.1.0.tar.gz
+WORKDIR mongo-c-driver-1.1.0
+RUN ./configure
+RUN make && make install
+
+# Install libopus-dev
+WORKDIR /usr/src
+RUN wget http://files.freeswitch.org/downloads/libs/opus-1.1.tar.gz
+RUN tar -xzvf opus-1.1.tar.gz
+WORKDIR opus-1.1
+RUN ./configure
+RUN make && make install
+
 # Download FreeSWITCH.
 WORKDIR /usr/src
 ENV GIT_SSL_NO_VERIFY=1
