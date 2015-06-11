@@ -78,6 +78,7 @@ WORKDIR /usr/src
 RUN wget http://files.freeswitch.org/downloads/libs/opus-1.1.tar.gz
 RUN tar -xzvf opus-1.1.tar.gz
 WORKDIR opus-1.1
+RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
