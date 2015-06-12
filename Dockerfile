@@ -10,7 +10,7 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >>
 RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
 
 # Install Dependencies.
-RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libperl-dev libpython-dev odbc-postgresql wget unixodbc yasm
+RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libperl-dev libpython-dev libsndfile1-dev odbc-postgresql wget unixodbc yasm
 
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
@@ -82,12 +82,12 @@ RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 
-# Install libsilk-dev
+# Install libg722-dev
 WORKDIR /usr/src
-RUN wget http://files.freeswitch.org/downloads/libs/libsilk-1.0.8.tar.gz
-RUN tar -xzvf libsilk-1.0.8.tar.gz
-WORKDIR libsilk-1.0.8
-RUN ./bootstrap.sh
+RUN wget http://files.freeswitch.org/downloads/libs/g722_1-0.2.0.tar.gz
+RUN tar -xzvf g722_1-0.2.0.tar.gz
+WORKDIR g722_1-0.2.0
+RUN ./autogen.sh
 RUN ./configure
 RUN make && make install
 

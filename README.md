@@ -56,7 +56,6 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_sms`: Apps for chat messages
 - `mod_snapshot`: Records a sliding window of audio and can take snapshots to disk.
 - `mod_snom`: Controlling softkeys on Snom phones (button function, led state, label etc.)
-- `mod_soundtouch`: Modify the pitch of the audio and other sound effects.
 - `mod_spandsp`: Spandsp tone and DTMF detectors. A combination of mod_fax and mod_voipcodecs and mod_t38gateway.
 - `mod_spy`: User spy module.
 - `mod_stress`: Module for detecting voice stress.
@@ -89,7 +88,6 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_isac`: Internet Speech Audio Codec open sourced by Google, used in WebRTC
 - `mod_mp4v`: MPEG4 video codec
 - `mod_opus`: The OPUS ultra-low delay audio codec (http://opus-codec.org/)
-- `mod_silk`: Skype's SILK codec.
 - `mod_siren`: G.722.1 (Siren7) and G.722.1 Annex C (Siren14) Polycom codecs.
 - `mod_speex`: Speex codec.
 - `mod_theora`: Theora video codec
