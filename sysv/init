@@ -14,18 +14,18 @@
 
 # Author: Travis Cross <tc@traviscross.com>
 
-PATH=/usr/share/freeswitch/bin:$PATH
+PATH=/usr/local/freeswitch/bin:$PATH
 DESC=freeswitch
 NAME=freeswitch
-DAEMON=/usr/share/freeswitch/bin/freeswitch
+DAEMON=/usr/local/freeswitch/bin/freeswitch
 DAEMON_ARGS="-u freeswitch -g daemon -nc"
 USER=freeswitch
 GROUP=daemon
-CONFDIR=/usr/share/freeswitch/conf
-RUNDIR=/usr/share/freeswitch/run
+CONFDIR=/usr/local/freeswitch/conf
+RUNDIR=/usr/local/freeswitch/run
 PIDFILE=$RUNDIR/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
-WORKDIR=/usr/share/freeswitch
+WORKDIR=/usr/local/freeswitch
 
 [ -x $DAEMON ] || exit 0
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
@@ -35,7 +35,7 @@ WORKDIR=/usr/share/freeswitch
 do_start() {
   if ! [ -f $CONFDIR/freeswitch.xml ]; then
     echo "$NAME is not configured so not starting.">&2
-    echo "Please review /usr/share/doc/$NAME/README.Debian">&2
+    echo "Please review /usr/local/doc/$NAME/README.Debian">&2
     return 3
   fi
 
