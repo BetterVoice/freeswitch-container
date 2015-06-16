@@ -173,18 +173,18 @@ RUN make uhd-moh-install
 RUN make samples
 
 # Post install configuration.
-# ADD sysv/init /etc/init.d/freeswitch
-# RUN chmod +x /etc/init.d/freeswitch
-# RUN update-rc.d -f freeswitch defaults
-# ADD sysv/default /etc/default/freeswitch
+ADD sysv/init /etc/init.d/freeswitch
+RUN chmod +x /etc/init.d/freeswitch
+RUN update-rc.d -f freeswitch defaults
+ADD sysv/default /etc/default/freeswitch
 
 # Add the freeswitch user.
-# RUN adduser --gecos "FreeSWITCH Voice Platform" --no-create-home --disabled-login --disabled-password --system --ingroup daemon --home /usr/local/freeswitch freeswitch
-# RUN chown -R freeswitch:daemon /usr/local/freeswitch
+RUN adduser --gecos "FreeSWITCH Voice Platform" --no-create-home --disabled-login --disabled-password --system --ingroup daemon --home /usr/local/freeswitch freeswitch
+RUN chown -R freeswitch:daemon /usr/local/freeswitch
 
 # Create the log file.
-#RUN touch /usr/local/freeswitch/log/freeswitch.log
-#RUN chown freeswitch:daemon /usr/local/freeswitch/log/freeswitch.log
+RUN touch /usr/local/freeswitch/log/freeswitch.log
+RUN chown freeswitch:daemon /usr/local/freeswitch/log/freeswitch.log
 
 # Open the container up to the world.
 EXPOSE 5060/tcp 5060/udp 5080/tcp 5080/udp
@@ -193,4 +193,4 @@ EXPOSE 8021/tcp
 EXPOSE 64535-65535/udp
 
 # Start the container.
-# CMD service snmpd start && service freeswitch start && tail -f /usr/local/freeswitch/log/freeswitch.log
+CMD service snmpd start && service freeswitch start && tail -f /usr/local/freeswitch/log/freeswitch.log
