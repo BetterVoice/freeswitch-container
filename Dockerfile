@@ -19,7 +19,7 @@ RUN update-alternatives --set awk /usr/bin/gawk
 ADD build/install-deps.sh /root/install-deps.sh
 WORKDIR /root
 RUN chmod +x install-deps.sh
-RUN install-deps.sh
+RUN ./install-deps.sh
 RUN rm install-deps.sh
 
 # Download FreeSWITCH.
