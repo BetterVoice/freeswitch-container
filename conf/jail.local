@@ -1,0 +1,24 @@
+[freeswitch]
+enabled  = true
+port     = 5060,5061,5080,5081
+filter   = freeswitch
+logpath  = /usr/local/freeswitch/log/freeswitch.log
+maxretry = 10
+action   = iptables-allports[name=freeswitch, protocol=all]
+           #sendmail-whois[name=FreeSwitch, dest=root, sender=fail2ban@localhost]
+
+[freeswitch-dos]
+enabled = true
+port = 5060,5061,5080,5081
+filter = freeswitch-dos
+logpath = /usr/local/freeswitch/log/freeswitch.log
+action = iptables-allports[name=freeswitch-dos, protocol=all]
+maxretry = 50
+findtime = 30
+bantime  = 6000
+
+[DEFAULT]
+# "ignoreip" can be an IP address, a CIDR mask or a DNS host
+ignoreip = 10.0.0.0/24
+bantime  = 600
+maxretry = 3
