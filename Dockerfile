@@ -10,7 +10,7 @@ RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >>
 RUN echo "deb-src http://us.archive.ubuntu.com/ubuntu/ trusty-updates multiverse" >> /etc/apt/source.list
 
 # Install Dependencies.
-RUN apt-get update && apt-get install -y autoconf automake bison build-essential gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libmp3lame-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libpython-dev odbc-postgresql unixodbc wget yasm
+RUN apt-get update && apt-get install -y autoconf automake bison build-essential fail2ban gawk git-core groff groff-base erlang-dev libasound2-dev libdb-dev libexpat1-dev libcurl4-openssl-dev libgdbm-dev libgnutls-dev libjpeg-dev libmp3lame-dev libncurses5 libncurses5-dev libperl-dev libogg-dev libsnmp-dev libssl-dev libtiff4-dev libtool libvorbis-dev libx11-dev libzrtpcpp-dev make portaudio19-dev python-dev snmp snmpd subversion unixodbc-dev uuid-dev zlib1g-dev libsqlite3-dev libpcre3-dev libspeex-dev libspeexdsp-dev libldns-dev libedit-dev libladspa-ocaml-dev libmemcached-dev libmp4v2-dev libmyodbc libpq-dev libvlc-dev libv8-dev liblua5.2-dev libyaml-dev libpython-dev odbc-postgresql sendmail unixodbc wget yasm
 
 # Use Gawk.
 RUN update-alternatives --set awk /usr/bin/gawk
@@ -22,6 +22,11 @@ RUN chmod +x install-deps.sh
 RUN ./install-deps.sh
 RUN rm install-deps.sh
 
+# Configure Fail2ban
+ADD conf/freeswitch.conf /etc/fail2ban/filter.d/freeswitch.conf
+ADD conf/freeswitch-dos.conf /etc/fail2ban/filter.d/freeswitch-dos.conf
+ADD conf/jail.local /etc/fail2ban/jail.local
+
 # Download FreeSWITCH.
 WORKDIR /usr/src
 ENV GIT_SSL_NO_VERIFY=1
@@ -29,7 +34,7 @@ RUN git clone https://freeswitch.org/stash/scm/fs/freeswitch.git
 
 # Bootstrap the build.
 WORKDIR freeswitch
-RUN git checkout -b v1.4.19
+RUN git checkout -b v1.4.20
 RUN ./bootstrap.sh
 
 # Enable the desired modules.
