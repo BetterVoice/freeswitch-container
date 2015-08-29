@@ -34,7 +34,7 @@ RUN git clone https://freeswitch.org/stash/scm/fs/freeswitch.git
 
 # Bootstrap the build.
 WORKDIR freeswitch
-RUN git checkout -b v1.4.20
+RUN git checkout -b v1.4.21
 RUN ./bootstrap.sh
 
 # Enable the desired modules.
