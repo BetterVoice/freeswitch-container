@@ -1,7 +1,7 @@
 FreeSWITCH Dockerfile
 =====================
 
-This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.20. An effort was made to build many modules so the container can be generic enough to serve many purposes.
+This project can be used to deploy a FreeSWITCH server inside a Docker container. The container currently uses the latest stable release version 1.4.21. An effort was made to build many modules so the container can be generic enough to serve many purposes.
 
 The container now includes fail2ban but in order for fail2ban to update the rules in IPTables it must be run with the `--privileged` flag.
 
