@@ -92,6 +92,8 @@ do_reload() {
 case "$1" in
   start)
     [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
+    /usr/bin/pulseaudio --system=true --daemonize=true --log-level=info --log-target=syslog &
+    sh /usr/local/freeswitch/skypopen/skype-clients-startup-dir/start_skype_clients.sh
     do_start
     case "$?" in
       0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
