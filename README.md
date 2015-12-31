@@ -13,9 +13,19 @@ The container exposes the following ports:
 
 ## Running the Container
 
-```sudo docker run --name freeswitch -p 5060:5060/tcp -p 5060:5060/udp -p 5080:5080/tcp -p 5080:5080/udp -p 8021:8021/tcp -p 7443:7443/tcp -p 60535-65535:60535-65535/udp -v /home/ubuntu/freeswitch/conf:/usr/local/freeswitch/conf bettervoice/freeswitch-container:1.6.5```
+```CID=$(sudo docker run --name freeswitch -p 5060:5060/tcp -p 5060:5060/udp -p 5080:5080/tcp -p 5080:5080/udp -p 8021:8021/tcp -p 7443:7443/tcp -p 60535-65535:60535-65535/udp -v /home/ubuntu/freeswitch/conf:/usr/local/freeswitch/conf bettervoice/freeswitch-container:1.6.5)```
 
 *Keep in mind that freeswitch has to be able to read the mounted volume.*
+
+### Large port range issue
+
+Because of an [issue](https://github.com/docker/docker/issues/11185) in docker, mapping a large port range like in `-p 60535-65535:60535-65535/udp` can eat a lot of memory. Starting docker with `--userland-proxy=false` solves this partially, but startup will still be slow. As a workaround you can remove this from the docker commandline and manually add the `iptables` rules instead:
+
+    CIP=$(sudo docker inspect --format='{{.NetworkSettings.IPAddress}}' $CID)
+
+    sudo iptables -A DOCKER -t nat -p udp -m udp ! -i docker0 --dport 60535:65535 -j DNAT --to-destination $CIP:60535-65535
+    sudo iptables -A DOCKER -p udp -m udp -d $CIP/32 ! -i docker0 -o docker0 --dport 60535:65535 -j ACCEPT
+    sudo iptables -A POSTROUTING -t nat -p udp -m udp -s $CIP/32 -d $CIP/32 --dport 60535:65535 -j MASQUERADE
 
 ## Available Modules
 
