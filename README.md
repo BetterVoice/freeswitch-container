@@ -27,6 +27,10 @@ Because of an [issue](https://github.com/docker/docker/issues/11185) in docker, 
     sudo iptables -A DOCKER -p udp -m udp -d $CIP/32 ! -i docker0 -o docker0 --dport 60535:65535 -j ACCEPT
     sudo iptables -A POSTROUTING -t nat -p udp -m udp -s $CIP/32 -d $CIP/32 --dport 60535:65535 -j MASQUERADE
 
+### Configuration
+
+Make sure you properly set `rtp-start-port` and `rtp-end-port` in `autoload_configs/switch.conf.xml`. Also you need to set `ext-rtp-ip` and `ext-sip-ip` for every profile which is accessible from your public ip address. See the freeswitch documentation for further instructions.
+
 ## Available Modules
 
 The following modules are available in the container and can be loaded at runtime by providing a `modules.conf.xml` file with the desired module names uncommented.
