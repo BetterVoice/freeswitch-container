@@ -121,5 +121,12 @@ cd soundtouch
 ./configure --enable-shared --prefix=/usr/local
 make && make install
 
+# Install libsmpp34
+cd /usr/src
+git clone git://git.osmocom.org/libsmpp34
+cd libsmpp34
+autoreconf -i
+./configure && make && make install
+
 # Configure the dynamic linker run-time bindings
 ldconfig
