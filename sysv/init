@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ### -*- mode:shell-script; indent-tabs-mode:nil; sh-basic-offset:2 -*-
 ### BEGIN INIT INFO
 # Provides: freeswitch
@@ -32,12 +32,31 @@ WORKDIR=/usr/local/freeswitch
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
 
+#
+# Function that sets ulimit values for the daemon
+#
+do_setlimits() {
+        ulimit -c unlimited
+        ulimit -d unlimited                                                                                                                                                                                
+        ulimit -f unlimited                                                                                                                                                                                
+        ulimit -i unlimited                                                                                                                                                                                
+        ulimit -n 999999                                                                                                                                                                                   
+        ulimit -q unlimited                                                                                                                                                                                
+        ulimit -u unlimited                                                                                                                                                                                
+        ulimit -v unlimited                                                                                                                                                                                
+        ulimit -x unlimited                                                                                                                                                                                
+        ulimit -s 240                                                                                                                                                                                      
+        ulimit -l unlimited                                                                                                                                                                                
+        return 0                                                                                                                                                                                           
+} 
+
 do_start() {
   if ! [ -f $CONFDIR/freeswitch.xml ]; then
     echo "$NAME is not configured so not starting.">&2
     echo "Please review /usr/local/doc/$NAME/README.Debian">&2
     return 3
   fi
+  do_setlimits
 
   # If snmpd has been started make sure we have access to the agentx master file.
   if [ -e /var/agentx/master ]; then
