@@ -27,6 +27,14 @@ cd broadvoice-0.1.0
 ./configure --enable-shared --prefix=/usr/local
 make && make install
 
+# Install libpng
+cd /usr/src
+wget http://files.freeswitch.org/downloads/libs/libpng-1.6.10.tar.gz
+tar -xzvf libpng-1.6.10.tar.gz
+cd libpng-1.6.10
+./configure --enable-shared --prefix=/usr/local
+make && make install
+
 # Install libcodec2-dev
 cd /usr/src
 wget http://files.freeswitch.org/downloads/libs/libcodec2-2.59.tar.gz
