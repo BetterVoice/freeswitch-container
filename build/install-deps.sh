@@ -139,7 +139,7 @@ autoreconf -i
 # Install libopenssl
 cd /usr/src
 git clone https://github.com/openssl/openssl.git -b OpenSSL_1_0_1t
-./config && make && make test && make install
+./config && make && make install
 
 # Configure the dynamic linker run-time bindings
 ldconfig
