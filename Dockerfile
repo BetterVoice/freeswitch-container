@@ -1,6 +1,6 @@
 # Jenkins.
 
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER Thomas Quintana <thomas@bettervoice.com>
 
 # Enable the Ubuntu multiverse repository.
