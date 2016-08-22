@@ -96,7 +96,7 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_bv`: BroadVoice16 and BroadVoice32 audio codecs (Broadcom codecs).
 - `mod_celt`: CELT ultra-low delay audio codec.
 - `mod_codec2`: FreeSWITCH CODEC2 Module.
-- 'mod_dahdi_codec' - DAHDI Codecs (G729A 8.0kbit, G723.1 5.3kbit).
+- `mod_dahdi_codec` - DAHDI Codecs (G729A 8.0kbit, G723.1 5.3kbit).
 - `mod_g723_1`: G.723.1 codec.
 - `mod_g729`: G.729 codec.
 - `mod_h26x`: H26X signed linear codec.
@@ -140,7 +140,7 @@ The following modules are available in the container and can be loaded at runtim
 - `mod_cdr_sqlite`: SQLite CDR Module
 - `mod_erlang_event`: Module to send/receive events/commands in Erlang's binary format.
 - `mod_event_multicast`: Broadcasts events to netmask.
-- `mod_event socket`: Sends events via a single socket.
+- `mod_event_socket`: Sends events via a single socket.
 - `mod_event_zmq`: http://www.zeromq.org/
 - `mod_json_cdr`: JSON CDR Module to files or curl
 - `mod_radius_cdr`: RADIUS CDR Module.
