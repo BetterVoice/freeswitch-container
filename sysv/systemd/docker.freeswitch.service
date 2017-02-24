@@ -1,0 +1,18 @@
+;;;;; Author: Nodar Nutsubidze
+
+[Unit]
+Description=Freeswitch Container
+After=syslog.target network.target local-fs.target docker.service
+Requires=docker.service
+
+; If running multiple FreeSWITCH containers
+; look at the associated GitHub wiki about
+; the different options to pass in.
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStart=/usr/local/bin/docker.freeswitch.py start
+ExecStop=/usr/local/bin/docker.freeswitch.py stop
+
+[Install]
+WantedBy=multi-user.target

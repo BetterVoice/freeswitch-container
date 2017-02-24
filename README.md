@@ -31,9 +31,34 @@ Because of an [issue](https://github.com/docker/docker/issues/11185) in docker, 
     sudo iptables -A DOCKER -p udp -m udp -d $CIP/32 ! -i docker0 -o docker0 --dport 60535:65535 -j ACCEPT
     sudo iptables -A POSTROUTING -t nat -p udp -m udp -s $CIP/32 -d $CIP/32 --dport 60535:65535 -j MASQUERADE
 
+### Systemd configuration
+Follow the following steps in order to run start this docker instance via systemctl.
+
+*Customizations*
+For customizing the startup settings look at the wiki documentation in GitHub
+which deals with running docker as a service in systemd.
+
+```
+sudo cp sysv/systemd/docker.freeswitch.service /lib/systemd/system/
+sudo systemctl daemon-reload
+sudo cp sysv/docker.freeswitch.py /usr/local/bin/
+
+# Enable the service
+sudo systemctl enable docker.freeswitch
+# Start the service
+sudo systemctl start docker.freeswitch
+# Stop the service
+sudo systemctl stop docker.freeswitch
+```
+
 ### Configuration
 
 Make sure you properly set `rtp-start-port` and `rtp-end-port` in `autoload_configs/switch.conf.xml`. Also you need to set `ext-rtp-ip` and `ext-sip-ip` for every profile which is accessible from your public ip address. See the freeswitch documentation for further instructions.
+
+### Shell access
+```
+sudo docker exec -it freeswitch /bin/bash
+```
 
 ## Available Modules
 
