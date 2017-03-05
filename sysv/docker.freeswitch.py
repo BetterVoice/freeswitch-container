@@ -24,6 +24,10 @@ NAME="freeswitch-run"
 IPT_CHAIN="DOCKER-FREESWITCH"
 IPT_MASQ_CHAIN="DOCKER-FREESWITCH-MASQ"
 
+# This will be updated by the script
+CONTAINER_IP = None
+ARGS = None
+
 def ipt_chain_exists(table, chain):
   """Check if a chain exists
 
@@ -59,6 +63,11 @@ def get_docker_ip(name, interval=1, max_wait=30):
   :param max_wait: How long to wait before failure
   :return: The IPAddress found otherwise None
   """
+  global CONTAINER_IP
+  # If the docker IP is already set then return that
+  if CONTAINER_IP is not None:
+    return CONTAINER_IP
+
   stime = time.time()
   cmd_list = ["/usr/bin/docker inspect"]
   cmd_list.append("-f '{{ .NetworkSettings.IPAddress }}'")
@@ -68,7 +77,10 @@ def get_docker_ip(name, interval=1, max_wait=30):
   while time.time() - stime < max_wait:
     output = subprocess.check_output(cmd, shell=True)
     if "Error:" not in output:
-      return output.strip()
+      # Update the global CONTAINER_IP and return
+      # the result
+      CONTAINER_IP = output.strip()
+      return CONTAINER_IP
     time.sleep(interval)
 
   print("Error: Failed to get IP for {}. Waited {}s".format(
@@ -169,6 +181,27 @@ def iptables_delete(args):
   """
   return iptables_run_rules(args, False)
 
+def _ip_addr_action(addr, dev, add=True):
+  """Add/remove an address
+
+  :param addr: The IP Address to add
+  :param dev: The device which should have the IP address
+  :param add: If True will add, otherwise remove
+  :return: True on success, False otherwise
+  """
+  action = "add"
+  if not add:
+    action = "del"
+
+  cmd = "ip addr {} {}/32 dev {}".format(
+    action,
+    addr,
+    dev)
+  if os.system(cmd) != 0:
+    print("Error: Failed to perform {}".format(cmd))
+    return False
+  return True
+
 def ap_start(args):
   """Start the docker instance
 
@@ -177,11 +210,6 @@ def ap_start(args):
   if args.bind:
     if not args.dev:
       exit("Specifying a bind IP requires specifying the device to use")
-    cmd = "ip addr add {}/32 dev {}".format(
-      args.bind, args.dev)
-    if os.system(cmd) != 0:
-      print("Error: Failed to perform {}".format(cmd))
-      sys.exit(1)
 
   # Perform cleanup of the old state
   os.system("/usr/bin/docker stop {}".format(args.name))
@@ -208,30 +236,66 @@ def ap_start(args):
     print("Failed to start docker. ret: {} cmd: {}".format(
       ret, cmd))
 
+  if args.bind and args.dev:
+    if not _ip_addr_action(args.bind, args.dev):
+      print("Failed to bind to {}:{}".format(args.bind, args.dev))
+      ap_stop(args)
+      sys.exit(2)
+
   if not iptables_add(args):
     print("Failed to write iptables rules. Stopping...")
     ap_stop(args)
     sys.exit(1)
+
+  # Re-attach to the container
+  os.system("/usr/bin/docker attach {}".format(args.name))
+
+  ######
+  # At this point we were told to stop
+  ######
+
+  # Stop the container - it should not be running but
+  # lets double check
+  _docker_stop(args.name)
+
+  # Remove the rules
+  iptables_delete(args)
+
+  # Remove the address associated
+  if args.bind and args.dev:
+    _ip_addr_action(args.bind, args.dev, add=False)
+
+def  _docker_stop(name):
+  """Stop a docker container
+
+  :param name: The docker to stop
+  """
+  os.system("/usr/bin/docker stop {}".format(name))
 
 def ap_stop(args):
   """Stop the docker instance
 
   :param args: The command line arguments
   """
-  if args.bind:
-    if not args.dev:
-      exit("Specifying a bind IP requires specifying the device to use")
+  _docker_stop(args.name)
 
-  # Remove the rules
-  iptables_delete(args)
+def ap_cleanup(args):
+  """This will cleanup the state
 
-  # Stop docker
-  os.system("/usr/bin/docker stop {}".format(args.name))
+  :param args: The command line arguments
+  """
+  # Flush the iptables chains
+  os.system("iptables -t nat -F {}".format(IPT_CHAIN))
+  os.system("iptables -t nat -F {}".format(IPT_MASQ_CHAIN))
+  os.system("iptables -F {}".format(IPT_CHAIN))
 
-  # Remove the address
+  # Stop the docker instances its running for the name specified
+  os.system("docker stop {}".format(args.name))
+
+  # If an address and dev is specified then attempt
+  # to remove it
   if args.bind and args.dev:
-    os.system("ip addr del {}/32 dev {} > /dev/null 2>&1".format(
-      args.bind, args.dev))
+    _ip_addr_action(args.bind, args.dev, add=False)
 
 if __name__ == "__main__":
   # Must be root
@@ -278,6 +342,8 @@ if __name__ == "__main__":
       help='Path on docker instance',
       default='/root/freeswitch')
 
+  # Setup Iptables
+  setup_iptables()
 
   parser = argparse.ArgumentParser(
     formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -292,6 +358,10 @@ if __name__ == "__main__":
     help="Stop docker freeSWITCH")
   _parser_add_common(p_stop)
 
+  p_cleanup = add_sp(sub_p, "cleanup", func=ap_cleanup,
+    help="Cleanup the docker freeswitch state")
+  _parser_add_common(p_cleanup)
+
   args = parser.parse_args()
+  ARGS = args
   args.func(args)
-  setup_iptables()

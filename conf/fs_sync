@@ -1,0 +1,16 @@
+#!/bin/bash
+
+LOCAL_PATH="/root/freeswitch/"
+FS_PATH="/usr/local/freeswitch/conf/"
+
+# Update the path to include freeswitch bin
+PATH="$PATH:/usr/local/freeswitch/bin"
+
+# Sync the directory contents
+rsync -avz $LOCAL_PATH $FS_PATH
+
+# Update the permissions
+chown -R freeswitch:daemon $FS_PATH
+
+# Reload mod_sofia
+fs_cli -x "reload mod_sofia"

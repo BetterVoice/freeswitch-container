@@ -57,6 +57,7 @@ RUN chmod +x /etc/init.d/freeswitch
 RUN update-rc.d -f freeswitch defaults
 ADD sysv/default /etc/default/freeswitch
 ADD build/bashrc /root/.bashrc
+ADD conf/fs_sync /bin/fs_sync
 
 # Add the freeswitch user.
 RUN adduser --gecos "FreeSWITCH Voice Platform" --no-create-home --disabled-login --disabled-password --system --ingroup daemon --home /usr/local/freeswitch freeswitch
