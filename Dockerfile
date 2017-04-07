@@ -30,6 +30,7 @@ RUN rm install-deps.sh
 ADD conf/freeswitch.conf /etc/fail2ban/filter.d/freeswitch.conf
 ADD conf/freeswitch-dos.conf /etc/fail2ban/filter.d/freeswitch-dos.conf
 ADD conf/jail.local /etc/fail2ban/jail.local
+RUN touch /var/log/auth.log
 
 # Download FreeSWITCH.
 WORKDIR /usr/src
